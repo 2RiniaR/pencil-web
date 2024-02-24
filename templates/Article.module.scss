@@ -1,0 +1,262 @@
+@use "global";
+
+.root {
+  padding: 1rem 0 2rem 0;
+}
+
+.back {
+  color: global.$light3;
+  font-size: 0.75em;
+  text-decoration: underline;
+}
+
+.heading {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  @include global.design-font;
+
+  .title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .date {
+    color: global.$light3;
+    font-size: 0.75em;
+  }
+}
+
+.body {
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  h1 {
+    margin-top: 3em;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-bottom: rgba(global.$light1, 0.4) solid 2px;
+  }
+
+  h2 {
+    margin-top: 2em;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    border-bottom: rgba(global.$light1, 0.4) solid 2px;
+  }
+
+  h3 {
+    margin-top: 1.5em;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    border-bottom: rgba(global.$light1, 0.4) solid 2px;
+  }
+
+  iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    margin: 1rem auto;
+  }
+
+  p {
+    white-space: break-spaces;
+    width: 100%;
+    line-height: 1.7;
+    margin-top: 0.7em;
+  }
+
+  p:has(img),
+  iframe {
+    margin-bottom: 4rem;
+    padding: 0;
+
+    & + p:has(img),
+    & + iframe {
+      margin-top: -2.5rem;
+    }
+  }
+
+  p:has(br:only-child) {
+    background: none;
+    display: block;
+    height: 3em;
+  }
+
+  iframe + p {
+    display: none !important;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 30em;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a {
+    color: #ba1317;
+    word-break: break-all;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline currentColor;
+    }
+
+    &:visited {
+      color: #7407c9;
+    }
+  }
+
+  pre {
+    width: 100%;
+    background-color: global.$dark1;
+    border-radius: 4px;
+    color: #dddddd;
+    padding: 0.5em 1em;
+    line-height: 1.5;
+    margin-top: 0.7em;
+    word-break: normal;
+    word-wrap: normal;
+    overflow-x: auto;
+  }
+
+  code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.9em;
+    margin-top: 0.7em;
+  }
+
+  dt {
+    line-height: 1.5;
+    text-decoration: underline;
+    margin-top: 0.7em;
+  }
+
+  dd {
+    text-indent: 1em;
+    margin-inline-start: 1em;
+    line-height: 1.5;
+    margin-top: 0.7em;
+  }
+
+  dl {
+    width: 100%;
+    border-radius: 0.5rem;
+    background: rgba(global.$light1, 0.3);
+    padding: 1rem;
+  }
+
+  h1 + h2,
+  h2 + h3 {
+    margin-top: 1.5em;
+  }
+
+  li {
+    display: list-item;
+    list-style-position: inside;
+  }
+
+  ol {
+    width: 100%;
+    list-style-type: decimal;
+    padding-inline-start: 2em;
+    line-height: 2;
+
+    padding: 0.6em 1.2em 0.4em 1.2em;
+    background: rgba(global.$light2, 80%);
+  }
+
+  ul {
+    width: 100%;
+    line-height: 2;
+    list-style-type: disc;
+    padding-inline-start: 2em;
+
+    padding: 0.6em 1.2em 0.4em 1.2em;
+    background: rgba(global.$light2, 80%);
+
+    ul {
+      list-style-type: circle;
+
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+
+  p:has(img) {
+    background: #ddd;
+  }
+
+  blockquote {
+    padding-inline-start: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+    border-left: rgba(global.$light1, 30%) solid 4px;
+    width: 100%;
+  }
+
+  q {
+    background: rgba(global.$light1, 0.3);
+    margin-inline: 0.4em;
+    padding-inline: 0.3em;
+  }
+
+  hr {
+    height: 4rem;
+    margin-top: 0.7em;
+    border-top: none;
+  }
+
+  strong {
+    font-weight: bold;
+    color: #ba1317;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  b {
+    font-weight: bold;
+  }
+
+  del {
+    text-decoration: line-through;
+  }
+
+  nav {
+    width: 100%;
+    border-left: rgba(global.$light1, 70%) solid 2px;
+    font-size: 0.8rem;
+
+    ul {
+      padding-inline-start: 0;
+      list-style-type: none !important;
+    }
+
+    li:has(ul) + li {
+      margin-top: 0.8rem;
+    }
+
+    a {
+      color: #626875;
+
+      &:visited {
+        color: #626875;
+      }
+    }
+  }
+}

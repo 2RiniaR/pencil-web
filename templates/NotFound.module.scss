@@ -1,0 +1,18 @@
+@use "global";
+
+.background {
+  @include global.background-image;
+}
+
+.title {
+  margin-top: 1rem;
+  color: global.$dark1;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.description {
+  color: global.$dark1;
+  font-size: 1rem;
+  text-align: center;
+}

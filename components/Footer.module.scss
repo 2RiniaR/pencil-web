@@ -1,0 +1,28 @@
+@use "global";
+
+.root {
+  user-select: text;
+  margin-top: 1rem;
+  color: global.$light2;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.name {
+}
+
+.copyright {
+}
+
+.links {
+  .element {
+    display: inline-block;
+    color: global.$light2;
+    margin-right: 0.5rem;
+    text-decoration: underline;
+
+    & * {
+      pointer-events: none;
+    }
+  }
+}

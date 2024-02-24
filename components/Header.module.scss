@@ -1,0 +1,36 @@
+@use "global";
+
+.root {
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  @include global.design-font;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+
+    .icon {
+      border-radius: 1000px;
+    }
+
+    .name {
+      margin-left: 1rem;
+      font-size: 32px;
+      font-weight: bolder;
+      align-self: center;
+      color: global.$light2;
+    }
+  }
+
+  .description {
+    display: flex;
+    justify-content: center;
+    color: global.$light2;
+  }
+}
+
+
