@@ -7,7 +7,7 @@ import { siteName, siteUrl, twitterId } from "~/libs/const";
 export const metadata: Metadata = {
   title: siteName,
   openGraph: {
-    url: "https://2riniar.com/",
+    url: siteUrl,
     title: siteName,
     siteName: siteName,
     type: "website",
@@ -20,7 +20,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: twitterId
-  }
+  },
+  metadataBase: new URL(siteUrl)
 };
 
 type Props = {
