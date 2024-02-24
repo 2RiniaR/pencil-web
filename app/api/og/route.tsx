@@ -11,16 +11,7 @@ type Props = {
 };
 
 export async function GET(request: never, { params }: Props) {
-  const font = await fetch(new URL("./mplus-2c-medium.woff", import.meta.url)).then((res) => res.arrayBuffer());
   return new ImageResponse(<OgImage title={params.title} thumbnail={params.thumbnail} />, {
-    fonts: [
-      {
-        name: "m-plus-2c",
-        data: font,
-        weight: 500,
-        style: "normal"
-      }
-    ],
     width: 1200,
     height: 630
   });
