@@ -1,11 +1,12 @@
 import fs from "fs/promises";
+import path from "path";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const font = await fs.readFile("./assets/mplus-2c-medium.ttf");
+  const font = await fs.readFile(path.join(process.cwd(), "assets", "mplus-2c-medium.ttf"));
   return new ImageResponse(
     <OgImage title={searchParams.get("title") ?? ""} thumbnail={searchParams.get("thumbnail") ?? undefined} />,
     {
