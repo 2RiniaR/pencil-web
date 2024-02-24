@@ -18,6 +18,7 @@ export const generateMetadata = async ({ params, searchParams }: Props) => {
   return {
     title: `${data.title} - ${siteName}`,
     openGraph: {
+      url: siteUrl,
       title: `${data.title} - ${siteName}`,
       siteName: siteName,
       type: "article",
@@ -30,7 +31,8 @@ export const generateMetadata = async ({ params, searchParams }: Props) => {
     twitter: {
       card: "summary_large_image",
       creator: twitterId
-    }
+    },
+    metadataBase: new URL(siteUrl)
   };
 };
 

@@ -1,20 +1,26 @@
+import fs from "fs/promises";
 import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 
-export const runtime = "edge";
-
-type Props = {
-  params: {
-    title: string;
-    thumbnail: string | undefined;
-  };
-};
-
-export async function GET(request: never, { params }: Props) {
-  return new ImageResponse(<OgImage title={params.title} thumbnail={params.thumbnail} />, {
-    width: 1200,
-    height: 630
-  });
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const font = await fs.readFile("./assets/mplus-2c-medium.ttf");
+  return new ImageResponse(
+    <OgImage title={searchParams.get("title") ?? ""} thumbnail={searchParams.get("thumbnail") ?? undefined} />,
+    {
+      fonts: [
+        {
+          name: "m-plus-2c",
+          data: font,
+          weight: 500,
+          style: "normal"
+        }
+      ],
+      width: 1200,
+      height: 630
+    }
+  );
 }
 
 type OgImageProps = {
