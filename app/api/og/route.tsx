@@ -1,18 +1,45 @@
+import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 
+export const runtime = "edge";
+const font = fetch(new URL("./mplus-2c-medium.ttf", import.meta.url)).then((res) => res.arrayBuffer());
+
 type Props = {
+  params: {
+    title: string;
+    thumbnail: string | undefined;
+  };
+};
+
+export async function GET(request: NextRequest, { params }: Props) {
+  return new ImageResponse(<OgImage title={params.title} thumbnail={params.thumbnail} />, {
+    fonts: [
+      {
+        name: "m-plus-2c",
+        data: await font,
+        weight: 500,
+        style: "normal"
+      }
+    ],
+    width: 1200,
+    height: 630
+  });
+}
+
+type OgImageProps = {
   title: string;
   thumbnail: string | undefined;
 };
 
-export const OgImage = ({ title, thumbnail }: Props) => (
+const OgImage = ({ title, thumbnail }: OgImageProps) => (
   <div
     style={{
       display: "flex",
       position: "relative",
       background: "linear-gradient(to bottom, #8791a3 0%, #6c717a 100%)",
-      width: "100%",
-      height: "100%",
+      width: 1200,
+      height: 630,
       color: "#dddddd",
       border: "solid 24px rgba(221, 221, 221, 0.7)"
     }}

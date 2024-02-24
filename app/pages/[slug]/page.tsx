@@ -22,7 +22,7 @@ export const generateMetadata = async ({ params, searchParams }: Props) => {
       siteName: siteName,
       type: "article",
       images: {
-        url: `${siteUrl}/api/pages/${params.slug}/og-image?dk=${searchParams.dk}`,
+        url: `${siteUrl}/api/og?title=${data.title}${data.thumbnail?.url !== undefined ? `&thumbnail=${data.thumbnail.url}` : ""}`,
         width: 1200,
         height: 630
       }
