@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 
 export const runtime = "edge";
-const font = fetch(new URL("./mplus-2c-medium.ttf", import.meta.url)).then((res) => res.arrayBuffer());
 
 type Props = {
   params: {
@@ -12,11 +11,12 @@ type Props = {
 };
 
 export async function GET(request: never, { params }: Props) {
+  const font = await fetch(new URL("./mplus-2c-medium.ttf", import.meta.url)).then((res) => res.arrayBuffer());
   return new ImageResponse(<OgImage title={params.title} thumbnail={params.thumbnail} />, {
     fonts: [
       {
         name: "m-plus-2c",
-        data: await font,
+        data: font,
         weight: 500,
         style: "normal"
       }
@@ -40,7 +40,10 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
       width: 1200,
       height: 630,
       color: "#dddddd",
-      border: "solid 24px rgba(221, 221, 221, 0.7)"
+      border: "solid 24px rgba(221, 221, 221, 0.7)",
+      fontFamily: '"m-plus-2c"',
+      fontWeight: 500,
+      fontStyle: "normal"
     }}
   >
     <img
@@ -62,8 +65,6 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
         justifyContent: "center",
         alignItems: "center",
         fontSize: 42,
-        fontStyle: "normal",
-        fontWeight: "bold",
         position: "absolute",
         width: 800,
         height: 100,
@@ -95,7 +96,6 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
     <div
       style={{
         fontSize: 32,
-        fontWeight: 400,
         position: "absolute",
         width: 400,
         left: 148,
@@ -107,7 +107,6 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
     <div
       style={{
         fontSize: 32,
-        fontWeight: 400,
         position: "absolute",
         right: 16,
         bottom: 16,
