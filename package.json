@@ -11,8 +11,7 @@
     "eslint:fix": "eslint --ignore-path .gitignore \"src/**/*.{js,jsx,ts,tsx}\" --fix",
     "stylelint": "stylelint --ignore-path .gitignore \"src/**/*.{css,scss}\"",
     "stylelint:fix": "stylelint --ignore-path .gitignore \"src/**/*.{css,scss}\" --fix",
-    "format": "prettier --write \"./**/*.ts\" \"./**/*.tsx\"",
-    "postinstall": "patch-package"
+    "format": "prettier --write \"./**/*.ts\" \"./**/*.tsx\""
   },
   "dependencies": {
     "@jsdevtools/rehype-toc": "^3.0.2",
@@ -24,8 +23,6 @@
     "microcms-js-sdk": "^2.7.0",
     "next": "14.1.0",
     "next-mdx-remote": "^4.4.1",
-    "patch-package": "^8.0.0",
-    "postinstall-postinstall": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.8.0",
