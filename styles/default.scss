@@ -8,6 +8,11 @@ body {
   @include global.readable-font;
 }
 
+body {
+  @include global.full-area;
+  background: global.$light1
+}
+
 a {
   color: inherit;
   text-decoration: none;
