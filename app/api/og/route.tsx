@@ -1,5 +1,4 @@
 import { ImageResponse } from "next/og";
-import { NextRequest } from "next/server";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 
 export const runtime = "edge";
@@ -12,7 +11,7 @@ type Props = {
   };
 };
 
-export async function GET(request: NextRequest, { params }: Props) {
+export async function GET(request: never, { params }: Props) {
   return new ImageResponse(<OgImage title={params.title} thumbnail={params.thumbnail} />, {
     fonts: [
       {
