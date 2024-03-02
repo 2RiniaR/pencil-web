@@ -4,6 +4,7 @@ import { PageLayout } from "~/templates/PageLayout";
 import styles from "~/templates/Article.module.scss";
 import { formatDisplayDate } from "~/libs/datetime";
 import { formatRichText } from "~/libs/microcms-client";
+import { ArticleShare } from "~/components/ArticleShare";
 
 type Props = {
   article: ArticleContent;
@@ -18,8 +19,14 @@ export const Article = ({ article }: Props) => (
       <div className={styles.heading}>
         <div className={styles.title}>{article.title}</div>
         <div className={styles.date}>{formatDisplayDate(article.publishedAt)}</div>
+        <div className={styles.share}>
+          <ArticleShare article={article} />
+        </div>
       </div>
       <div className={styles.body} dangerouslySetInnerHTML={{ __html: formatRichText(article.body) }}></div>
+      <div className={styles.share}>
+        <ArticleShare article={article} displayMessage />
+      </div>
     </div>
   </PageLayout>
 );
