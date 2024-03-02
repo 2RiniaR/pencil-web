@@ -11,8 +11,6 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
-
 export const generateMetadata = async ({ params, searchParams }: Props) => {
   const data = await getDetail(params.slug, { draftKey: searchParams.dk });
   return {
