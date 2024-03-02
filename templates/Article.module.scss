@@ -35,20 +35,23 @@
     margin-top: 3em;
     font-size: 1.5rem;
     line-height: 1.5;
+    font-weight: 700;
     border-bottom: rgba(global.$light1, 0.4) solid 2px;
   }
 
   h2 {
-    margin-top: 2em;
+    margin-top: 2.5em;
     font-size: 1.35rem;
     line-height: 1.5;
+    font-weight: 700;
     border-bottom: rgba(global.$light1, 0.4) solid 2px;
   }
 
   h3 {
-    margin-top: 1.5em;
+    margin-top: 2em;
     font-size: 1.2rem;
     line-height: 1.5;
+    font-weight: 700;
     border-bottom: rgba(global.$light1, 0.4) solid 2px;
   }
 
@@ -62,8 +65,7 @@
   p {
     white-space: break-spaces;
     width: 100%;
-    line-height: 1.7;
-    margin-top: 0.7em;
+    margin-top: 1.5em;
   }
 
   p:has(img),
@@ -99,7 +101,7 @@
   }
 
   a {
-    color: #ba1317;
+    color: #008cff;
     word-break: break-all;
     cursor: pointer;
 
@@ -108,21 +110,26 @@
     }
 
     &:visited {
-      color: #7407c9;
+      color: #375064;
     }
   }
 
-  pre {
-    width: 100%;
-    background-color: global.$dark1;
-    border-radius: 4px;
+  .fileRoot {
+    margin-top: 1.5em;
+    line-height: 1;
+  }
+
+  .filename {
+    display: inline-block;
+    background-color: #35445d;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    padding: 0.3em 0.8em;
     color: #dddddd;
-    padding: 0.5em 1em;
-    line-height: 1.5;
-    margin-top: 0.7em;
-    word-break: normal;
-    word-wrap: normal;
-    overflow-x: auto;
+  }
+
+  .filename ~ pre {
+    margin-top: 0;
+    border-radius: 0 4px 4px 4px;
   }
 
   code {
@@ -130,6 +137,26 @@
     -webkit-font-smoothing: antialiased;
     font-size: 0.9em;
     margin-top: 0.7em;
+    padding: 0.2em 0.4em;
+    background-color: #c7d7dc;
+  }
+
+  pre {
+    width: 100%;
+    background-color: global.$dark1;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    word-break: normal;
+    word-wrap: normal;
+    overflow-x: auto;
+
+    code {
+      padding: 0;
+      color: #dddddd;
+      background-color: transparent;
+    }
   }
 
   dt {
@@ -190,10 +217,6 @@
     }
   }
 
-  p:has(img) {
-    background: #ddd;
-  }
-
   blockquote {
     padding-inline-start: 1em;
     padding-top: 0.5em;
@@ -202,6 +225,11 @@
     margin-bottom: 1.2em;
     border-left: rgba(global.$light1, 30%) solid 4px;
     width: 100%;
+  }
+
+  figure {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
   }
 
   q {
