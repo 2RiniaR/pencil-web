@@ -1,4 +1,4 @@
-import { getDetail } from "~/libs/microcms";
+import { getDetail, getList } from "~/libs/microcms";
 import { Article } from "~/templates/Article";
 import { siteName, siteUrl, twitterId } from "~/libs/const";
 
@@ -9,6 +9,13 @@ type Props = {
   searchParams: {
     dk: string;
   };
+};
+
+export const generateStaticParams = async () => {
+  const data = await getList();
+  return data.contents.map((page) => ({
+    slug: page.id
+  }));
 };
 
 export const generateMetadata = async ({ params, searchParams }: Props) => {
