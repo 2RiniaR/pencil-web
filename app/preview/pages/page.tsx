@@ -4,13 +4,13 @@ import { siteName, siteUrl, twitterId } from "~/libs/const";
 
 type Props = {
   searchParams: {
-    slug: string;
+    id: string;
     dk: string;
   };
 };
 
 export const generateMetadata = async ({ searchParams }: Props) => {
-  const data = await getDetail(searchParams.slug, { draftKey: searchParams.dk });
+  const data = await getDetail(searchParams.id, { draftKey: searchParams.dk });
   return {
     title: `${data.title} - ${siteName}`,
     openGraph: {
@@ -33,7 +33,7 @@ export const generateMetadata = async ({ searchParams }: Props) => {
 };
 
 const Page = async ({ searchParams }: Props) => {
-  const data = await getDetail(searchParams.slug, { draftKey: searchParams.dk });
+  const data = await getDetail(searchParams.id, { draftKey: searchParams.dk });
   return <Article article={data} />;
 };
 
