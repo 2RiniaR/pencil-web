@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArticleContent, formatRichText } from "~/libs/microcms";
+import { ArticleContent } from "~/libs/microcms";
 import { PageLayout } from "~/templates/PageLayout";
 import styles from "~/templates/Article.module.scss";
 import { formatDisplayDate } from "~/libs/datetime";
+import { formatRichText } from "~/libs/microcms-client";
 
 type Props = {
   article: ArticleContent;
