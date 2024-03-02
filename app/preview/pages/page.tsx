@@ -1,22 +1,16 @@
-import { getDetail, getList } from "~/libs/microcms";
+import { getDetail } from "~/libs/microcms";
 import { Article } from "~/templates/Article";
 import { siteName, siteUrl, twitterId } from "~/libs/const";
 
 type Props = {
-  params: {
+  searchParams: {
     slug: string;
+    dk: string;
   };
 };
 
-export const generateStaticParams = async () => {
-  const data = await getList();
-  return data.contents.map((page) => ({
-    slug: page.id
-  }));
-};
-
-export const generateMetadata = async ({ params }: Props) => {
-  const data = await getDetail(params.slug);
+export const generateMetadata = async ({ searchParams }: Props) => {
+  const data = await getDetail(searchParams.slug, { draftKey: searchParams.dk });
   return {
     title: `${data.title} - ${siteName}`,
     openGraph: {
@@ -38,8 +32,8 @@ export const generateMetadata = async ({ params }: Props) => {
   };
 };
 
-const Page = async ({ params }: Props) => {
-  const data = await getDetail(params.slug);
+const Page = async ({ searchParams }: Props) => {
+  const data = await getDetail(searchParams.slug, { draftKey: searchParams.dk });
   return <Article article={data} />;
 };
 
