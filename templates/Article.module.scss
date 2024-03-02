@@ -10,6 +10,11 @@
   text-decoration: underline;
 }
 
+.share {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .heading {
   margin-top: 1rem;
   margin-bottom: 3rem;
@@ -27,6 +32,8 @@
 }
 
 .body {
+  margin-bottom: 3rem;
+
   & > *:first-child {
     margin-top: 0;
   }

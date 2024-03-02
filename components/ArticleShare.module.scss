@@ -1,0 +1,28 @@
+@use "global";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 0.7em;
+  color: global.$dark1;
+  line-height: 1.5;
+  text-align: center;
+  width: 100%;
+}
+
+.elementRoot {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  fill: global.$light3;
+  color: global.$light3;
+}
+
+.element {
+  width: 24px;
+  height: 24px;
+}
