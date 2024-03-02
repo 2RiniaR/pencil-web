@@ -57,9 +57,12 @@
 
   iframe {
     width: 100%;
-    aspect-ratio: 16 / 9;
     display: block;
     margin: 1rem auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 30em;
+    object-fit: contain;
   }
 
   p {
