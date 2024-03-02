@@ -55,14 +55,14 @@
     border-bottom: rgba(global.$light1, 0.4) solid 2px;
   }
 
-  iframe {
+  div:has(iframe) {
     width: 100%;
+    margin: 1.5rem auto;
+    max-width: 30em;
+  }
+
+  iframe {
     display: block;
-    margin: 1rem auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 30em;
-    object-fit: contain;
   }
 
   p {
