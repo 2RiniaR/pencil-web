@@ -27,25 +27,25 @@ export const ArticleShare = ({ article, displayMessage }: Props) => {
           href={`https://twitter.com/intent/tweet?url=${url}&text=${title}`}
           className={styles.element}
         >
-          <Image src={twitterLogo} alt="X(旧Twitter)" width={24} />
+          <Image src={twitterLogo} alt="X(旧Twitter)" width={24} className={styles.icon} />
         </ExternalLink>
         <ExternalLink
           aria-label="Facebookに投稿"
           href={`http://www.facebook.com/sharer.php?u=${url}`}
           className={styles.element}
         >
-          <Image src={facebookLogo} alt="Facebook" width={24} />
+          <Image src={facebookLogo} alt="Facebook" width={24} className={styles.icon} />
         </ExternalLink>
         <ExternalLink
           aria-label="はてなブックマークに登録"
           href={`https://b.hatena.ne.jp/add?mode=confirm&url=${url}&title=${title}`}
           className={styles.element}
         >
-          <Image src={hatenabookmarkLogo} alt="はてなブックマーク" width={24} />
+          <Image src={hatenabookmarkLogo} alt="はてなブックマーク" width={24} className={styles.icon} />
         </ExternalLink>
         <div className={styles.element}>
           <ClipboardButton content={`${title}\n${url}\n`}>
-            <Image src={linkIcon} alt="リンク" width={24} />
+            <Image src={linkIcon} alt="リンク" width={24} className={styles.icon} />
           </ClipboardButton>
         </div>
       </div>

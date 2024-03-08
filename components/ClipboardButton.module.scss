@@ -13,12 +13,10 @@
   text-align: center;
   background-color: #3b4e72;
   color: white;
-  border-radius: 8px;
-  font-size: 0.9em;
-  padding: 0.5em;
+  font-size: 0.7em;
   transition: opacity 0.1s;
+  top: -0.4em;
   transform: translate(-50%, -100%);
-  left: 50%;
 
   &.active {
     opacity: 1;

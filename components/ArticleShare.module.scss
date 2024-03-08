@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  line-height: 1;
 }
 
 .title {
@@ -12,6 +13,7 @@
   line-height: 1.5;
   text-align: center;
   width: 100%;
+  margin-bottom: 0.5em;
 }
 
 .elementRoot {
@@ -25,4 +27,13 @@
 .element {
   width: 24px;
   height: 24px;
+  display: block;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  aspect-ratio: 1 / 1;
+  top: 0;
+  left: 0;
 }
