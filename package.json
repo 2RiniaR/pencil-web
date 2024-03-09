@@ -1,6 +1,6 @@
 {
-  "name": "rinear-raft",
-  "version": "1.0.4",
+  "name": "pencil-web",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev --hostname 0.0.0.0",
