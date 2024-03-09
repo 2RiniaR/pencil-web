@@ -60,24 +60,25 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
     <div
       style={{
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         fontSize: 42,
         position: "absolute",
         width: 800,
-        height: 100,
+        height: 132,
         top: 330,
         left: 176
       }}
     >
-      <p
+      <div
         style={{
-          margin: 0,
-          textAlign: "center"
+          display: "block",
+          lineClamp: "2 ' ...'"
         }}
       >
         {title}
-      </p>
+      </div>
     </div>
     <img
       style={{
