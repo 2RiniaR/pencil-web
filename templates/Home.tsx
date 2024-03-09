@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Home.module.scss";
 import { ArticleContent } from "~/libs/microcms";
-import { formatExceededTime } from "~/libs/datetime";
 import { PageLayout } from "~/templates/PageLayout";
 import defaultThumbnail from "public/default_thumbnail.png";
+import { ExceedTime } from "~/components/ExceedTime";
 
 type Props = {
   articles: ArticleContent[];
@@ -24,7 +24,9 @@ export const Home = ({ articles }: Props) => (
           />
           <div className={styles.content}>
             <p className={styles.name}>{article.title}</p>
-            <p className={styles.date}>{formatExceededTime(article.publishedAt)}</p>
+            <p className={styles.date}>
+              <ExceedTime from={article.publishedAt} />
+            </p>
           </div>
         </Link>
       ))}
