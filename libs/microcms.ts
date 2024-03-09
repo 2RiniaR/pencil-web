@@ -17,6 +17,7 @@ export type ArticleContent = {
   title: string;
   thumbnail?: MicroCMSImage;
   body: string;
+  description: string;
 } & MicroCMSContentId &
   MicroCMSDate;
 
