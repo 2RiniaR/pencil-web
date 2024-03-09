@@ -2,13 +2,15 @@ import React from "react";
 import { Metadata } from "next";
 import "styles/default.scss";
 import Head from "next/head";
-import { siteName, siteUrl, twitterId } from "~/libs/const";
+import { siteDescription, siteName, siteUrl, twitterId } from "~/libs/const";
 
 export const metadata: Metadata = {
   title: siteName,
+  description: siteDescription,
   openGraph: {
     url: siteUrl,
     title: siteName,
+    description: siteDescription,
     siteName: siteName,
     type: "website",
     images: {

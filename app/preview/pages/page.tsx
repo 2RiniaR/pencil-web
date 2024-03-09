@@ -15,9 +15,11 @@ export const generateMetadata = async ({ searchParams }: Props) => {
   const data = await getDetail(searchParams.id, { draftKey: searchParams.dk });
   return {
     title: `${data.title} - ${siteName}`,
+    description: data.description,
     openGraph: {
       url: siteUrl,
       title: `${data.title} - ${siteName}`,
+      description: data.description,
       siteName: siteName,
       type: "article",
       images: {

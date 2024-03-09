@@ -19,9 +19,11 @@ export const generateMetadata = async ({ params }: Props) => {
   const data = await getDetail(params.slug);
   return {
     title: `${data.title} - ${siteName}`,
+    description: data.description,
     openGraph: {
       url: siteUrl,
       title: `${data.title} - ${siteName}`,
+      description: data.description,
       siteName: siteName,
       type: "article",
       images: {
