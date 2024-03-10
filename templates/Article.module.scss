@@ -15,6 +15,11 @@
   justify-content: flex-end;
 }
 
+.about {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
 .heading {
   margin-top: 1rem;
   margin-bottom: 3rem;
@@ -106,20 +111,6 @@
     object-fit: contain;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  a {
-    color: #008cff;
-    word-break: break-all;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline currentColor;
-    }
-
-    &:visited {
-      color: #375064;
-    }
   }
 
   .fileRoot {

@@ -6,6 +6,11 @@
   padding: 2rem 0;
 }
 
+.about {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
 .article {
   @include global.media(phone) {
     width: 100%;
@@ -31,7 +36,6 @@
 
     .name {
       display: block;
-      text-decoration: underline;
       min-height: 54px;
     }
 

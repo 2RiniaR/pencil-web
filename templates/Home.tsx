@@ -5,6 +5,7 @@ import { ArticleContent } from "~/libs/microcms";
 import { PageLayout } from "~/templates/PageLayout";
 import defaultThumbnail from "public/default_thumbnail.png";
 import { ExceedTime } from "~/components/ExceedTime";
+import { About } from "~/components/About";
 
 type Props = {
   articles: ArticleContent[];
@@ -13,6 +14,9 @@ type Props = {
 export const Home = ({ articles }: Props) => (
   <PageLayout>
     <div className={styles.root}>
+      <div className={styles.about}>
+        <About />
+      </div>
       {articles.map((article) => (
         <Link key={article.id} href={`pages/${article.id}`} className={styles.article}>
           <Image
