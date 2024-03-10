@@ -17,8 +17,18 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: #0e8ed2;
+  word-break: break-all;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline currentColor;
+  }
+
+  &:visited {
+    color: #537591;
+  }
 }
 
 * {

@@ -108,20 +108,6 @@
     margin-right: auto;
   }
 
-  a {
-    color: #008cff;
-    word-break: break-all;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline currentColor;
-    }
-
-    &:visited {
-      color: #375064;
-    }
-  }
-
   .fileRoot {
     margin-top: 1.5em;
     line-height: 1;
