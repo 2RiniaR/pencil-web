@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Home.module.scss";
-import { ArticleContent } from "~/libs/microcms";
+import { ArticleContent, getTypeColor } from "~/libs/microcms";
 import { PageLayout } from "~/templates/PageLayout";
 import defaultThumbnail from "public/default_thumbnail.png";
 import { ExceedTime } from "~/components/ExceedTime";
@@ -25,6 +25,7 @@ export const Home = ({ articles }: Props) => (
             height={54}
             alt={article.title}
             className={styles.thumbnail}
+            style={{ borderLeft: `4px solid ${getTypeColor(article.type)}` }}
           />
           <div className={styles.content}>
             <p className={styles.name}>{article.title}</p>

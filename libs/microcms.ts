@@ -18,6 +18,7 @@ export type ArticleContent = {
   thumbnail?: MicroCMSImage;
   body: string;
   description: string;
+  type: "blue" | "green" | "sky" | "white" | "yellow";
 } & MicroCMSContentId &
   MicroCMSDate;
 
@@ -27,4 +28,16 @@ export async function getList(queries?: MicroCMSQueries) {
 
 export async function getDetail(contentId: string, queries?: MicroCMSQueries) {
   return await client.getListDetail<ArticleContent>({ endpoint: "pages", contentId, queries }).catch(notFound);
+}
+
+const typeColors = {
+  blue: "#aeb4d0",
+  green: "#96d0c8",
+  sky: "#6dd4ea",
+  white: "#ffffff",
+  yellow: "#ffef84"
+};
+
+export function getTypeColor(type: ArticleContent["type"]) {
+  return typeColors[type];
 }

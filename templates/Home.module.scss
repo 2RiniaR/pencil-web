@@ -28,6 +28,8 @@
 
   .thumbnail {
     flex-shrink: 0;
+    box-sizing: content-box;
+    padding-left: 4px;
   }
 
   .content {
