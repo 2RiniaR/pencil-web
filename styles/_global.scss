@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $dark1: #141a24;
 $light1: #8791a3;
 $light2: #dddddd;
@@ -25,7 +27,7 @@ $breakpoints: (
 ) !default;
 
 @mixin media($breakpoint: phone) {
-  @media #{map-get($breakpoints, $breakpoint)} {
+  @media #{map.get($breakpoints, $breakpoint)} {
     @content;
   }
 }
