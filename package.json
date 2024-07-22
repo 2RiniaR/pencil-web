@@ -23,7 +23,7 @@
     "microcms-js-sdk": "^2.7.0",
     "next": "14.1.1",
     "next-mdx-remote": "^4.4.1",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.8.0",
     "rehype-slug": "^6.0.0",
