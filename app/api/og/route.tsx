@@ -8,7 +8,12 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const font = await fs.readFile(path.join(process.cwd(), "assets", "mplus-2c-medium.ttf"));
   return new ImageResponse(
-    <OgImage title={searchParams.get("title") ?? ""} thumbnail={searchParams.get("thumbnail") ?? undefined} />,
+    (
+      <OgImage
+        title={decodeURIComponent(searchParams.get("title") ?? "")}
+        thumbnail={searchParams.get("thumbnail") ?? undefined}
+      />
+    ),
     {
       fonts: [
         {
