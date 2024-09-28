@@ -24,7 +24,7 @@ export const ArticleShare = ({ article, displayMessage }: Props) => {
       <div className={styles.elementRoot}>
         <ExternalLink
           aria-label="X(旧Twitter)にポスト"
-          href={`https://twitter.com/intent/tweet?url=${url}&text=${title}`}
+          href={`https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(title)}`}
           className={styles.element}
         >
           <Image src={twitterLogo} alt="X(旧Twitter)" width={24} className={styles.icon} />
@@ -38,7 +38,7 @@ export const ArticleShare = ({ article, displayMessage }: Props) => {
         </ExternalLink>
         <ExternalLink
           aria-label="はてなブックマークに登録"
-          href={`https://b.hatena.ne.jp/add?mode=confirm&url=${url}&title=${title}`}
+          href={`https://b.hatena.ne.jp/add?mode=confirm&url=${url}&title=${encodeURIComponent(title)}`}
           className={styles.element}
         >
           <Image src={hatenabookmarkLogo} alt="はてなブックマーク" width={24} className={styles.icon} />
