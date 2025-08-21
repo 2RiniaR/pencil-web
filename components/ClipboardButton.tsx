@@ -15,7 +15,7 @@ export const ClipboardButton = ({ content, children, className }: Props) => {
   const onClick = async () => {
     await navigator.clipboard.writeText(content);
     setIsHover(true);
-    setTimeout(() => setIsHover(false), 2000);
+    setTimeout(() => setIsHover(false), 500);
   };
 
   return (

@@ -19,26 +19,18 @@ export const About = () => {
           <ExternalLink className={styles.element} href={`https://x.com/${twitterId}`}>
             <Image src={twitterLogo} alt="X(旧Twitter)" width={24} className={styles.image} />
           </ExternalLink>
-          <ExternalLink className={styles.element} href="https://mail.google.com/mail/?view=cm&to=7rinia@gmail.com">
-            <Image src={mailIcon} alt="メール" width={24} className={styles.image} />
-          </ExternalLink>
-          <ExternalLink className={styles.element} href="https://www.youtube.com/@2riniar">
-            <Image src={youtubeLogo} alt="YouTube" width={24} className={styles.image} />
-          </ExternalLink>
           <ExternalLink className={styles.element} href="https://github.com/2RiniaR">
             <Image src={githubLogo} alt="GitHub" width={24} className={styles.image} />
           </ExternalLink>
         </div>
       </div>
       <div className={styles.detail}>
-        <p className={styles.profile}>
-          某社でUnityエンジニアをしてます。
+        <p className={styles.profile}>ゲームクリエイターをしてます！ わくわくする遊びを作るのが好き！</p>
+        <p>
+          ゲーム以外にもたまに変なものを作ってます。森羅万象の設計が特技。
           <ExternalLink href="https://approvers.dev/">限界開発鯖</ExternalLink>／
           <ExternalLink href="https://rinear.net/">RineaR</ExternalLink>
           所属。
-        </p>
-        <p>
-          幼少期から周りを巻き込んで企画をすることが好きで、現在はゲーム作り以外にもWeb開発・コミュニティ活動・デザイン等を趣味でやってます。
         </p>
       </div>
     </div>

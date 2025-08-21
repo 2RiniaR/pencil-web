@@ -15,12 +15,6 @@ export const Footer = () => (
       <ExternalLink className={styles.element} href={`https://x.com/${twitterId}`}>
         X(Twitter)
       </ExternalLink>
-      <ExternalLink className={styles.element} href="https://mail.google.com/mail/?view=cm&to=7rinia@gmail.com">
-        メール
-      </ExternalLink>
-      <ExternalLink className={styles.element} href="https://www.youtube.com/@2riniar">
-        YouTube
-      </ExternalLink>
       <ExternalLink className={styles.element} href="https://github.com/2RiniaR">
         GitHub
       </ExternalLink>

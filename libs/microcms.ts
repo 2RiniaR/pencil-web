@@ -31,9 +31,9 @@ export async function getDetail(contentId: string, queries?: MicroCMSQueries) {
 }
 
 const typeColors = {
-  blue: "#aeb4d0",
-  green: "#96d0c8",
-  sky: "#6dd4ea",
+  blue: "#3c77ff",
+  green: "#42e1ca",
+  sky: "#4ae4ff",
   white: "#ffffff",
   yellow: "#ffef84"
 };

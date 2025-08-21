@@ -17,7 +17,7 @@ export const Article = ({ article }: Props) => (
       <Link href="/" className={styles.back}>
         {"<"} 一覧へ
       </Link>
-      <div className={styles.heading} style={{ borderLeft: `4px solid ${getTypeColor(article.type)}` }}>
+      <div className={styles.heading} style={{ borderLeft: `8px solid ${getTypeColor(article.type)}` }}>
         <div className={styles.title}>{article.title}</div>
         <div className={styles.date}>{formatDisplayDate(article.publishedAt)}</div>
       </div>

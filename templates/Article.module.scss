@@ -49,7 +49,8 @@
     font-size: 1.5rem;
     line-height: 1.5;
     font-weight: 700;
-    border-bottom: rgba(global.$light1, 0.4) solid 2px;
+    padding-bottom: 0.1em;
+    border-bottom: global.$light1 solid 4px;
   }
 
   h2 {
@@ -57,7 +58,8 @@
     font-size: 1.35rem;
     line-height: 1.5;
     font-weight: 700;
-    border-bottom: rgba(global.$light1, 0.4) solid 2px;
+    padding-bottom: 0.1em;
+    border-bottom: global.$light1 solid 4px;
   }
 
   h3 {
@@ -65,7 +67,8 @@
     font-size: 1.2rem;
     line-height: 1.5;
     font-weight: 700;
-    border-bottom: rgba(global.$light1, 0.4) solid 2px;
+    padding-bottom: 0.1em;
+    border-bottom: global.$light1 solid 4px;
   }
 
   div:has(iframe) {
@@ -116,15 +119,14 @@
 
   .filename {
     display: inline-block;
-    background-color: #35445d;
+    background-color: global.$light1;
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     padding: 0.3em 0.8em;
-    color: #dddddd;
+    color: #ffffff;
   }
 
   .filename ~ pre {
     margin-top: 0;
-    border-radius: 0 4px 4px 4px;
   }
 
   code {
@@ -133,13 +135,12 @@
     font-size: 0.9em;
     margin-top: 0.7em;
     padding: 0.2em 0.4em;
-    background-color: #c7d7dc;
+    background-color: #d0d0d0;
   }
 
   pre {
     width: 100%;
     background-color: global.$dark1;
-    border-radius: 4px;
     padding: 0.5em 1em;
     line-height: 1.5;
     margin-top: 1.5em;
@@ -169,7 +170,6 @@
 
   dl {
     width: 100%;
-    border-radius: 0.5rem;
     background: rgba(global.$light1, 0.3);
     padding: 1rem;
   }
@@ -241,7 +241,7 @@
 
   strong {
     font-weight: bold;
-    color: #ba1317;
+    color: #e35b10;
   }
 
   u {

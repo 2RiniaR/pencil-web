@@ -8,7 +8,8 @@
 
 .about {
   width: 100%;
-  margin-bottom: 2em;
+  margin-top: 1em;
+  margin-bottom: 4em;
 }
 
 .article {
@@ -19,8 +20,7 @@
     width: 100%;
   }
   @include global.media(desktop) {
-    width: calc(480px - 3.5rem);
-    margin-right: 1rem;
+    width: 100%;
   }
 
   display: flex;
@@ -29,16 +29,15 @@
   .thumbnail {
     flex-shrink: 0;
     box-sizing: content-box;
-    padding-left: 4px;
   }
 
   .content {
-    margin-left: 0.8rem;
+    padding-left: 1em;
+    margin-right: 0.5rem;
     width: 100%;
 
     .name {
       display: block;
-      min-height: 54px;
     }
 
     .date {
