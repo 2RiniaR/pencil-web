@@ -6,6 +6,7 @@ import { formatDisplayDate } from "~/libs/datetime";
 import { formatRichText } from "~/libs/microcms-client";
 import { ArticleShare } from "~/components/ArticleShare";
 import { About } from "~/components/About";
+import { ArticleBody } from "~/components/ArticleBody";
 
 type Props = {
   article: ArticleContent;
@@ -24,7 +25,7 @@ export const Article = ({ article }: Props) => (
       <div className={styles.share}>
         <ArticleShare article={article} />
       </div>
-      <div className={styles.body} dangerouslySetInnerHTML={{ __html: formatRichText(article.body) }}></div>
+      <ArticleBody content={formatRichText(article.body)} />
       <div className={styles.about}>
         <About />
       </div>
