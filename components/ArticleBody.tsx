@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import styles from "./ArticleBody.module.scss";
 import { ImageOverlay } from "~/components/ImageOverlay";
-import styles from "~/templates/Article.module.scss";
 
 type Props = {
   content: string;
