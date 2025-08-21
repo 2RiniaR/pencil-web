@@ -1,12 +1,11 @@
 @use "global";
 
 .root {
-  border: 2px solid global.$light1;
-  border-radius: 1em;
+  border-left: 8px solid global.$light1;
   display: grid;
   grid-template-columns: min-content auto;
   grid-template-rows: 1fr auto;
-  padding: 1em;
+  padding: 1em 1em 1em 2em;
 }
 
 .icon {

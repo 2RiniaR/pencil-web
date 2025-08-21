@@ -39,11 +39,11 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
     style={{
       display: "flex",
       position: "relative",
-      background: "linear-gradient(to bottom, #8791a3 0%, #6c717a 100%)",
+      background: "#ffffff",
       width: 1200,
       height: 630,
-      color: "#dddddd",
-      border: "solid 24px rgba(221, 221, 221, 0.7)",
+      color: "#404040",
+      border: "solid 24px #f1d072",
       fontFamily: '"m-plus-2c"',
       fontWeight: 500,
       fontStyle: "normal"
@@ -52,12 +52,11 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
     <img
       style={{
         position: "absolute",
-        width: 416,
-        height: 234,
+        width: 424,
+        height: 242,
         left: 368,
         top: 70,
-        border: "solid 4px rgba(221, 221, 221, 0.7)",
-        borderRadius: 4
+        border: "solid 8px #f1d072"
       }}
       src={thumbnail ?? `${siteUrl}/default_thumbnail.png`}
       alt={title}

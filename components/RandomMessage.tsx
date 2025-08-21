@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import { chooseRandom } from "~/libs/util";
 
 const messages = [
-  "進捗、どうですか？", // 全体攻撃がしたかった
-  "にゃーん", // エンジニアはみんな猫らしい
-  "この世界完全に理解した", // ここでは私が世界の神なので
   "今日も生きててえらい！", // エライさんから引用 https://www.rinear.net/materials/marvelous
   "み　て　る　よ", // みてるよから引用 https://www.rinear.net/materials/eyes
   "それね、ちょっと分かる", // 創造主botから引用 https://github.com/approvers/king-server

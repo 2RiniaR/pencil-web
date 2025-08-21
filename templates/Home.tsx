@@ -19,20 +19,19 @@ export const Home = ({ articles }: Props) => (
       </div>
       {articles.map((article) => (
         <Link key={article.id} href={`pages/${article.id}`} className={styles.article}>
-          <Image
-            src={article.thumbnail?.url ?? defaultThumbnail}
-            width={96}
-            height={54}
-            alt={article.title}
-            className={styles.thumbnail}
-            style={{ borderLeft: `4px solid ${getTypeColor(article.type)}` }}
-          />
-          <div className={styles.content}>
+          <div className={styles.content} style={{ borderLeft: `8px solid ${getTypeColor(article.type)}` }}>
             <p className={styles.name}>{article.title}</p>
             <p className={styles.date}>
               <ExceedTime from={article.publishedAt} />
             </p>
           </div>
+          <Image
+            src={article.thumbnail?.url ?? defaultThumbnail}
+            width={144}
+            height={81}
+            alt={article.title}
+            className={styles.thumbnail}
+          />
         </Link>
       ))}
     </div>

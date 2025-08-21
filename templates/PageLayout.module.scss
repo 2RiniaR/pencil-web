@@ -2,7 +2,7 @@
 
 .root {
   @include global.page;
-  background: linear-gradient(to bottom, global.$light1 0%, global.$light3 100%);
+  background: global.$light4;
 }
 
 .content {
@@ -36,11 +36,9 @@
     padding: 0 1rem;
   }
   @include global.media(tablet) {
-    border-radius: 8px;
     padding: 0 2rem;
   }
   @include global.media(desktop) {
-    border-radius: 8px;
     padding: 0 2.5rem;
   }
 }
