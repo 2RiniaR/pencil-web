@@ -2,8 +2,6 @@ import Image from "next/image";
 import styles from "./ArticleShare.module.scss";
 import twitterLogo from "public/twitter_logo.png";
 import { ExternalLink } from "~/components/ExternalLink";
-import facebookLogo from "public/facebook_logo.png";
-import hatenabookmarkLogo from "public/hatenabookmark_logo.png";
 import linkIcon from "public/link_icon.svg";
 import { ArticleContent } from "~/libs/microcms";
 import { siteName, siteUrl } from "~/libs/const";

@@ -6,8 +6,6 @@ import { ExternalLink } from "~/components/ExternalLink";
 import { twitterId } from "~/libs/const";
 import twitterLogo from "public/twitter_logo.png";
 import githubLogo from "public/github_logo.png";
-import youtubeLogo from "public/youtube_logo.png";
-import mailIcon from "public/mail_icon.png";
 
 export const About = () => {
   return (
