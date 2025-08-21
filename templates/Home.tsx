@@ -21,14 +21,15 @@ export const Home = ({ articles }: Props) => (
         <Link key={article.id} href={`pages/${article.id}`} className={styles.article}>
           <div className={styles.content} style={{ borderLeft: `8px solid ${getTypeColor(article.type)}` }}>
             <p className={styles.name}>{article.title}</p>
+            <p className={styles.detail}>{article.description}</p>
             <p className={styles.date}>
               <ExceedTime from={article.publishedAt} />
             </p>
           </div>
           <Image
             src={article.thumbnail?.url ?? defaultThumbnail}
-            width={144}
-            height={81}
+            width={320}
+            height={180}
             alt={article.title}
             className={styles.thumbnail}
           />
