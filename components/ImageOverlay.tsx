@@ -32,7 +32,6 @@ export const ImageOverlay = ({ src, alt, isOpen, onClose }: Props) => {
 
   // ホイールズーム
   const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
     const delta = e.deltaY > 0 ? -0.1 : 0.1;
     setScale((prev) => Math.min(Math.max(prev + delta, 0.5), 3));
   }, []);
@@ -134,11 +133,7 @@ export const ImageOverlay = ({ src, alt, isOpen, onClose }: Props) => {
   return (
     <div
       className={styles.overlay}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
-      }}
+      onClick={onClose}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           onClose();
