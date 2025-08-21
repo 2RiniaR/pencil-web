@@ -15,6 +15,7 @@ export const ImageOverlay = ({ src, alt, isOpen, onClose }: Props) => {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [lastTouchDistance, setLastTouchDistance] = useState(0);
   const imageRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const resetTransform = useCallback(() => {
     setScale(1);
@@ -118,6 +119,11 @@ export const ImageOverlay = ({ src, alt, isOpen, onClose }: Props) => {
       document.addEventListener("mouseup", handleMouseUp);
       document.body.style.overflow = "hidden";
       resetTransform();
+
+      // オーバーレイにフォーカスを当てる
+      if (overlayRef.current) {
+        overlayRef.current.focus();
+      }
     }
 
     return () => {
@@ -132,6 +138,7 @@ export const ImageOverlay = ({ src, alt, isOpen, onClose }: Props) => {
 
   return (
     <div
+      ref={overlayRef}
       className={styles.overlay}
       onClick={onClose}
       onKeyDown={(e) => {
