@@ -1,7 +1,7 @@
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import "highlight.js/styles/hybrid.css";
-import styles from "~/templates/Article.module.scss";
+import styles from "~/components/ArticleBody.module.scss";
 
 export const formatRichText = (richText: string) => {
   const $ = load(richText);
