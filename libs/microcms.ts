@@ -1,5 +1,6 @@
 import { createClient, MicroCMSContentId, MicroCMSDate, MicroCMSImage, MicroCMSQueries } from "microcms-js-sdk";
 import { notFound } from "next/navigation";
+import "dotenv/config";
 
 const apiKeyName = "MICROCMS_API_KEY";
 

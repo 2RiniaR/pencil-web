@@ -21,12 +21,7 @@ export const generateMetadata = async ({ searchParams }: Props) => {
       title: `${data.title} - ${siteName}`,
       description: data.description,
       siteName: siteName,
-      type: "article",
-      images: {
-        url: `${siteUrl}/api/og?title=${encodeURIComponent(data.title)}${data.thumbnail?.url !== undefined ? `&thumbnail=${data.thumbnail.url}` : ""}`,
-        width: 1200,
-        height: 630
-      }
+      type: "article"
     },
     twitter: {
       card: "summary_large_image",
