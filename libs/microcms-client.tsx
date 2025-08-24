@@ -10,7 +10,7 @@ export const formatRichText = (richText: string) => {
     if (!lang) return text;
     try {
       return hljs.highlight(text, { language: lang?.replace(/^language-/, "") || "" }).value;
-    } catch (e) {
+    } catch {
       return hljs.highlightAuto(text).value;
     }
   };

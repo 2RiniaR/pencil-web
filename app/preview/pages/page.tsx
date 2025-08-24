@@ -3,16 +3,17 @@ import { Article } from "~/templates/Article";
 import { siteName, siteUrl, twitterId } from "~/libs/const";
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     id: string;
     dk: string;
-  };
+  }>;
 };
 
 export const revalidate = 0;
 
 export const generateMetadata = async ({ searchParams }: Props) => {
-  const data = await getDetail(searchParams.id, { draftKey: searchParams.dk });
+  const { id, dk } = await searchParams;
+  const data = await getDetail(id, { draftKey: dk });
   return {
     title: `${data.title} - ${siteName}`,
     description: data.description,
@@ -32,7 +33,8 @@ export const generateMetadata = async ({ searchParams }: Props) => {
 };
 
 const Page = async ({ searchParams }: Props) => {
-  const data = await getDetail(searchParams.id, { draftKey: searchParams.dk });
+  const { id, dk } = await searchParams;
+  const data = await getDetail(id, { draftKey: dk });
   return <Article article={data} />;
 };
 
