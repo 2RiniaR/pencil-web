@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev --hostname 0.0.0.0",
-    "build": "npm run generate:og && next build",
-    "generate:og": "tsx scripts/generate-og-images.tsx",
+    "build": "next build",
     "export": "next export",
     "start": "next start",
     "eslint": "eslint --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx}\"",
@@ -16,7 +15,6 @@
   },
   "dependencies": {
     "@jsdevtools/rehype-toc": "^3.0.2",
-    "@vercel/blob": "^1.1.1",
     "cheerio": "^1.0.0-rc.12",
     "dayjs": "^1.11.10",
     "destyle.css": "^4.0.1",
