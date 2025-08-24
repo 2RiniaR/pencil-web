@@ -4,9 +4,9 @@ import { siteName, siteUrl, twitterId } from "~/libs/const";
 import { generateOgImage } from "~/libs/og-image";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export const generateStaticParams = async () => {
@@ -17,7 +17,8 @@ export const generateStaticParams = async () => {
 };
 
 export const generateMetadata = async ({ params }: Props) => {
-  const data = await getDetail(params.slug);
+  const { slug } = await params;
+  const data = await getDetail(slug);
   return {
     title: `${data.title} - ${siteName}`,
     description: data.description,
@@ -28,7 +29,7 @@ export const generateMetadata = async ({ params }: Props) => {
       siteName: siteName,
       type: "article",
       images: {
-        url: `${siteUrl}/og/${params.slug}.png`,
+        url: `${siteUrl}/og/${slug}.png`,
         width: 1200,
         height: 630
       }
@@ -42,8 +43,9 @@ export const generateMetadata = async ({ params }: Props) => {
 };
 
 const Page = async ({ params }: Props) => {
-  const data = await getDetail(params.slug);
-  await generateOgImage(data.title, data.thumbnail?.url, `og/${params.slug}.png`);
+  const { slug } = await params;
+  const data = await getDetail(slug);
+  await generateOgImage(data.title, data.thumbnail?.url, `og/${slug}.png`);
   return <Article article={data} />;
 };
 
