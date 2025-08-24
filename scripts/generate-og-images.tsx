@@ -3,6 +3,7 @@ import path from "path";
 import crypto from "crypto";
 import { ImageResponse } from "next/og";
 import React from "react";
+import { put, head, list } from "@vercel/blob";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 import { getList } from "~/libs/microcms";
 
@@ -108,6 +109,27 @@ type CacheData = {
 };
 
 async function loadCache(): Promise<CacheData> {
+  // Vercel Blob Storageが利用可能な場合は使用
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      console.log("📥 Blob Storageからキャッシュを読み込み中...");
+      
+      // まずファイルが存在するかチェック
+      const { blobs } = await list({ prefix: "og-cache.json" });
+      if (blobs.length > 0) {
+        // ファイルが存在する場合、URLから直接fetch
+        const response = await fetch(blobs[0].url);
+        if (response.ok) {
+          const text = await response.text();
+          return JSON.parse(text);
+        }
+      }
+    } catch (error) {
+      console.log("⚠️ Blob Storageからの読み込みに失敗（初回ビルドの可能性）");
+    }
+  }
+
+  // ローカルファイルシステムを使用
   const cachePath = path.join(process.cwd(), ".og-cache.json");
   try {
     const data = await fs.readFile(cachePath, "utf-8");
@@ -118,6 +140,21 @@ async function loadCache(): Promise<CacheData> {
 }
 
 async function saveCache(cache: CacheData): Promise<void> {
+  // Vercel Blob Storageが利用可能な場合は使用
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      console.log("📤 Blob Storageにキャッシュを保存中...");
+      await put("og-cache.json", JSON.stringify(cache, null, 2), {
+        access: "public",
+        contentType: "application/json"
+      });
+      console.log("✅ Blob Storageへの保存完了");
+    } catch (error) {
+      console.error("❌ Blob Storageへの保存に失敗:", error);
+    }
+  }
+
+  // ローカルファイルシステムにも保存
   const cachePath = path.join(process.cwd(), ".og-cache.json");
   await fs.writeFile(cachePath, JSON.stringify(cache, null, 2));
 }

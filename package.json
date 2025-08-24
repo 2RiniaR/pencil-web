@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@jsdevtools/rehype-toc": "^3.0.2",
+    "@vercel/blob": "^1.1.1",
     "cheerio": "^1.0.0-rc.12",
     "dayjs": "^1.11.10",
     "destyle.css": "^4.0.1",
