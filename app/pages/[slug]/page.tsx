@@ -1,6 +1,7 @@
 import { getDetail, getList } from "~/libs/microcms";
 import { Article } from "~/templates/Article";
 import { siteName, siteUrl, twitterId } from "~/libs/const";
+import { generateOgImage } from "~/libs/og-image";
 
 type Props = {
   params: {
@@ -27,7 +28,7 @@ export const generateMetadata = async ({ params }: Props) => {
       siteName: siteName,
       type: "article",
       images: {
-        url: `${siteUrl}/api/og?title=${encodeURIComponent(data.title)}${data.thumbnail?.url !== undefined ? `&thumbnail=${data.thumbnail.url}` : ""}`,
+        url: `${siteUrl}/og/${params.slug}.png`,
         width: 1200,
         height: 630
       }
@@ -42,6 +43,7 @@ export const generateMetadata = async ({ params }: Props) => {
 
 const Page = async ({ params }: Props) => {
   const data = await getDetail(params.slug);
+  await generateOgImage(data.title, data.thumbnail?.url, `og/${params.slug}.png`);
   return <Article article={data} />;
 };
 

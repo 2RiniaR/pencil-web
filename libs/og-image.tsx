@@ -1,33 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 import { ImageResponse } from "next/og";
-import { NextRequest } from "next/server";
+import React from "react";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
-
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const font = await fs.readFile(path.join(process.cwd(), "assets", "mplus-2c-medium.ttf"));
-  return new ImageResponse(
-    (
-      <OgImage
-        title={decodeURIComponent(searchParams.get("title") ?? "")}
-        thumbnail={searchParams.get("thumbnail") ?? undefined}
-      />
-    ),
-    {
-      fonts: [
-        {
-          name: "m-plus-2c",
-          data: font,
-          weight: 500,
-          style: "normal"
-        }
-      ],
-      width: 1200,
-      height: 630
-    }
-  );
-}
 
 type OgImageProps = {
   title: string;
@@ -120,3 +95,26 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
     </div>
   </div>
 );
+
+export async function generateOgImage(title: string, thumbnail: string | undefined, dist: string): Promise<void> {
+  const font = await fs.readFile(path.join(process.cwd(), "assets", "mplus-2c-medium.ttf"));
+
+  const imageResponse = new ImageResponse(<OgImage title={title} thumbnail={thumbnail} />, {
+    fonts: [
+      {
+        name: "m-plus-2c",
+        data: font,
+        weight: 500,
+        style: "normal"
+      }
+    ],
+    width: 1200,
+    height: 630
+  });
+
+  const buffer = await imageResponse.arrayBuffer();
+  const outputPath = path.join(process.cwd(), "public", dist);
+
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await fs.writeFile(outputPath, Buffer.from(buffer));
+}
