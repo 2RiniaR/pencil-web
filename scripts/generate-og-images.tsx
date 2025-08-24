@@ -3,7 +3,7 @@ import path from "path";
 import crypto from "crypto";
 import { ImageResponse } from "next/og";
 import React from "react";
-import { put, head, list } from "@vercel/blob";
+import { put, list } from "@vercel/blob";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 import { getList } from "~/libs/microcms";
 
@@ -113,7 +113,7 @@ async function loadCache(): Promise<CacheData> {
   if (process.env.BLOB_READ_WRITE_TOKEN) {
     try {
       console.log("📥 Blob Storageからキャッシュを読み込み中...");
-      
+
       // まずファイルが存在するかチェック
       const { blobs } = await list({ prefix: "og-cache.json" });
       if (blobs.length > 0) {
