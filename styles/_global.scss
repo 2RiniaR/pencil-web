@@ -10,12 +10,16 @@ $light4: #f1d072;
   font-family:
     -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif,
     "Segoe UI Emoji";
+  font-display: swap;
   line-height: 1.9;
   font-weight: normal;
 }
 
 @mixin design-font {
-  font-family: "m-plus-2c", sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif,
+    "Segoe UI Emoji";
+  font-display: swap;
   font-weight: 500;
   font-style: normal;
 }
