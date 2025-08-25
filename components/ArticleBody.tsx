@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
+import Image from "next/image";
+import parse, { Element, HTMLReactParserOptions } from "html-react-parser";
 import styles from "./ArticleBody.module.scss";
 import { ImageOverlay } from "~/components/ImageOverlay";
 
@@ -10,40 +12,64 @@ type Props = {
 
 export const ArticleBody = ({ content }: Props) => {
   const [overlayImage, setOverlayImage] = useState<{ src: string; alt: string } | null>(null);
+  const imageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
-  useEffect(() => {
-    const handleImageClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === "IMG" && target.closest(`.${styles.body}`)) {
-        const img = target as HTMLImageElement;
-        setOverlayImage({
-          src: img.src,
-          alt: img.alt || ""
-        });
-      }
-    };
+  // HTMLコンテンツの前処理: 不要なタグを除去
+  const cleanedContent = content
+    .replace(/<html[^>]*>/gi, "")
+    .replace(/<\/html>/gi, "")
+    .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, "")
+    .replace(/<body[^>]*>/gi, "")
+    .replace(/<\/body>/gi, "");
 
-    const bodyElement = document.querySelector(`.${styles.body}`);
-    if (bodyElement) {
-      bodyElement.addEventListener("click", handleImageClick as EventListener);
-
-      // 画像にカーソルスタイルを追加
-      const images = bodyElement.querySelectorAll("img");
-      images.forEach((img) => {
-        (img as HTMLImageElement).style.cursor = "zoom-in";
-      });
-    }
-
-    return () => {
-      if (bodyElement) {
-        bodyElement.removeEventListener("click", handleImageClick as EventListener);
-      }
-    };
+  const handleImageClick = useCallback((src: string, alt: string) => {
+    setOverlayImage({ src, alt });
   }, []);
+
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      if (domNode instanceof Element) {
+        // imgタグをNext/Imageに変換
+        if (domNode.name === "img") {
+          const { src, alt, width, height } = domNode.attribs;
+
+          // 画像URLがmicroCMSのものかチェック
+          if (!src) return;
+
+          // widthとheightが指定されていない場合のデフォルト値
+          const imgWidth = width ? parseInt(width, 10) : 800;
+          const imgHeight = height ? parseInt(height, 10) : 600;
+
+          return (
+            <div
+              ref={(el) => {
+                if (el) imageRefs.current.set(src, el);
+              }}
+              style={{
+                cursor: "zoom-in"
+              }}
+              onClick={() => handleImageClick(src, alt || "")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleImageClick(src, alt || "");
+                }
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              <Image src={src} alt={alt || ""} width={imgWidth} height={imgHeight} />
+            </div>
+          );
+        }
+      }
+    }
+  };
+
+  const parsedContent = parse(cleanedContent, options);
 
   return (
     <>
-      <div className={styles.body} dangerouslySetInnerHTML={{ __html: content }}></div>
+      <div className={styles.body}>{parsedContent}</div>
       {overlayImage && (
         <ImageOverlay
           src={overlayImage.src}
