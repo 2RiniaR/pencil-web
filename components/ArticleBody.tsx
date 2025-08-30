@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import parse, { Element, HTMLReactParserOptions } from "html-react-parser";
+import DOMPurify from "isomorphic-dompurify";
 import styles from "./ArticleBody.module.scss";
 import { ImageOverlay } from "~/components/ImageOverlay";
 
@@ -15,7 +16,7 @@ export const ArticleBody = ({ content }: Props) => {
   const imageRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   // HTMLコンテンツの前処理: 不要なタグを除去
-  const cleanedContent = content
+  const cleanedContent = DOMPurify.sanitize(content)
     .replace(/<html[^>]*>/gi, "")
     .replace(/<\/html>/gi, "")
     .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, "")
