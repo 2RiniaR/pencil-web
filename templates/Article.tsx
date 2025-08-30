@@ -3,16 +3,16 @@ import { ArticleContent, getTypeColor } from "~/libs/microcms";
 import { PageLayout } from "~/templates/PageLayout";
 import styles from "~/templates/Article.module.scss";
 import { formatDisplayDate } from "~/libs/datetime";
-import { formatRichText } from "~/libs/microcms-client";
 import { ArticleShare } from "~/components/ArticleShare";
 import { About } from "~/components/About";
 import { ArticleBody } from "~/components/ArticleBody";
 
 type Props = {
   article: ArticleContent;
+  parsedBody: React.ReactNode;
 };
 
-export const Article = ({ article }: Props) => (
+export const Article = ({ article, parsedBody }: Props) => (
   <PageLayout>
     <div className={styles.root}>
       <Link href="/" className={styles.back}>
@@ -25,7 +25,7 @@ export const Article = ({ article }: Props) => (
       <div className={styles.share}>
         <ArticleShare article={article} />
       </div>
-      <ArticleBody content={formatRichText(article.body)} />
+      <ArticleBody parsedContent={parsedBody} />
       <div className={styles.about}>
         <About />
       </div>

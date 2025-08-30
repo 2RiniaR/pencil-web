@@ -1,4 +1,5 @@
 import { getDetail } from "~/libs/microcms";
+import { formatRichText, parseArticleContent } from "~/libs/microcms-client";
 import { Article } from "~/templates/Article";
 import { siteName, siteUrl, twitterId } from "~/libs/const";
 
@@ -35,7 +36,12 @@ export const generateMetadata = async ({ searchParams }: Props) => {
 const Page = async ({ searchParams }: Props) => {
   const { id, dk } = await searchParams;
   const data = await getDetail(id, { draftKey: dk });
-  return <Article article={data} />;
+
+  // サーバーサイドでHTMLをパース
+  const formattedBody = formatRichText(data.body);
+  const parsedBody = parseArticleContent(formattedBody);
+
+  return <Article article={data} parsedBody={parsedBody} />;
 };
 
 export default Page;

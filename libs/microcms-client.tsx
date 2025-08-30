@@ -1,6 +1,9 @@
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import "highlight.js/styles/hybrid.css";
+import DOMPurify from "isomorphic-dompurify";
+import parse, { Element, HTMLReactParserOptions, domToReact, DOMNode } from "html-react-parser";
+import Image from "next/image";
 import styles from "~/components/ArticleBody.module.scss";
 
 export const formatRichText = (richText: string) => {
@@ -30,4 +33,55 @@ export const formatRichText = (richText: string) => {
   });
 
   return $.html();
+};
+
+// サーバーサイドでHTMLコンテンツをsanitizeしてReact要素に変換
+export const parseArticleContent = (content: string) => {
+  // HTML前処理: 不要なタグを除去してsanitize
+  const cleanedContent = DOMPurify.sanitize(content)
+    .replace(/<html[^>]*>/gi, "")
+    .replace(/<\/html>/gi, "")
+    .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, "")
+    .replace(/<body[^>]*>/gi, "")
+    .replace(/<\/body>/gi, "");
+
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      if (domNode instanceof Element) {
+        // img要素をNext/Imageに変換（クリックハンドラーはクライアント側で追加）
+        if (domNode.name === "img") {
+          const { src, alt, width, height } = domNode.attribs;
+
+          if (!src) return;
+
+          const imgWidth = width ? parseInt(width, 10) : 800;
+          const imgHeight = height ? parseInt(height, 10) : 600;
+
+          return (
+            <div className="article-image-wrapper" style={{ cursor: "zoom-in" }}>
+              <Image
+                src={src}
+                alt={alt || ""}
+                width={imgWidth}
+                height={imgHeight}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
+          );
+        }
+
+        // リンクのtarget="_blank"にrel="noopener noreferrer"を追加
+        if (domNode.name === "a" && domNode.attribs.target === "_blank") {
+          return (
+            <a href={domNode.attribs.href} target="_blank" rel="noopener noreferrer">
+              {domToReact(domNode.children as DOMNode[], options)}
+            </a>
+          );
+        }
+      }
+    }
+  };
+
+  return parse(cleanedContent, options);
 };
