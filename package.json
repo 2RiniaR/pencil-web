@@ -19,7 +19,7 @@
     "dayjs": "^1.11.13",
     "destyle.css": "^4.0.1",
     "dompurify": "^3.2.6",
-    "dotenv": "^17.2.1",
+    "dotenv": "^17.2.3",
     "highlight.js": "^11.11.1",
     "html-react-parser": "^5.2.6",
     "image-size": "^2.0.2",
