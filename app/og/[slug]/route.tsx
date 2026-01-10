@@ -1,8 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
 import { ImageResponse } from "next/og";
-import React from "react";
+import { getDetail } from "~/libs/microcms";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
+
+export const runtime = "nodejs";
 
 type OgImageProps = {
   title: string;
@@ -96,10 +98,13 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
   </div>
 );
 
-export async function generateOgImage(title: string, thumbnail: string | undefined, dist: string): Promise<void> {
+export async function GET(_request: globalThis.Request, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const data = await getDetail(slug);
+
   const font = await fs.readFile(path.join(process.cwd(), "assets", "mplus-2c-medium.ttf"));
 
-  const imageResponse = new ImageResponse(<OgImage title={title} thumbnail={thumbnail} />, {
+  return new ImageResponse(<OgImage title={data.title} thumbnail={data.thumbnail?.url} />, {
     fonts: [
       {
         name: "m-plus-2c",
@@ -111,10 +116,4 @@ export async function generateOgImage(title: string, thumbnail: string | undefin
     width: 1200,
     height: 630
   });
-
-  const buffer = await imageResponse.arrayBuffer();
-  const outputPath = path.join(process.cwd(), "public", dist);
-
-  await fs.mkdir(path.dirname(outputPath), { recursive: true });
-  await fs.writeFile(outputPath, Buffer.from(buffer));
 }

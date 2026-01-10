@@ -2,7 +2,6 @@ import { getDetail, getList } from "~/libs/microcms";
 import { formatRichText, parseArticleContent } from "~/libs/microcms-client";
 import { Article } from "~/templates/Article";
 import { siteName, siteUrl, twitterId } from "~/libs/const";
-import { generateOgImage } from "~/libs/og-image";
 
 type Props = {
   params: Promise<{
@@ -30,7 +29,7 @@ export const generateMetadata = async ({ params }: Props) => {
       siteName: siteName,
       type: "article",
       images: {
-        url: `${siteUrl}/og/${slug}.png`,
+        url: `${siteUrl}/og/${slug}`,
         width: 1200,
         height: 630
       }
@@ -50,8 +49,6 @@ const Page = async ({ params }: Props) => {
   // サーバーサイドでHTMLをパース
   const formattedBody = formatRichText(data.body);
   const parsedBody = parseArticleContent(formattedBody);
-
-  await generateOgImage(data.title, data.thumbnail?.url, `og/${slug}.png`);
 
   return <Article article={data} parsedBody={parsedBody} />;
 };
