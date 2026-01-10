@@ -35,12 +35,6 @@
     border-bottom: global.$light1 solid 4px;
   }
 
-  div:has(iframe) {
-    width: 100%;
-    margin: 1.5rem auto;
-    max-width: 30em;
-  }
-
   iframe {
     display: block;
   }

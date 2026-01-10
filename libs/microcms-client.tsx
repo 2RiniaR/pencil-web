@@ -1,8 +1,8 @@
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import "highlight.js/styles/hybrid.css";
-import DOMPurify from "isomorphic-dompurify";
 import parse, { Element, HTMLReactParserOptions, domToReact, DOMNode } from "html-react-parser";
+import sanitizeHtml from "sanitize-html";
 import Image from "next/image";
 import styles from "~/components/ArticleBody.module.scss";
 
@@ -38,7 +38,29 @@ export const formatRichText = (richText: string) => {
 // サーバーサイドでHTMLコンテンツをsanitizeしてReact要素に変換
 export const parseArticleContent = (content: string) => {
   // HTML前処理: 不要なタグを除去してsanitize
-  const cleanedContent = DOMPurify.sanitize(content)
+  const cleanedContent = sanitizeHtml(content, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+      "img",
+      "iframe",
+      "figure",
+      "figcaption",
+      "picture",
+      "source",
+      "video",
+      "audio"
+    ]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      "*": ["class", "id", "style", "data-*"],
+      img: ["src", "alt", "width", "height", "loading"],
+      iframe: ["src", "width", "height", "frameborder", "allow", "allowfullscreen"],
+      a: ["href", "target", "rel"],
+      video: ["src", "controls", "width", "height"],
+      audio: ["src", "controls"],
+      source: ["src", "type"]
+    },
+    allowedIframeHostnames: ["www.youtube.com", "youtube.com", "player.vimeo.com"]
+  })
     .replace(/<html[^>]*>/gi, "")
     .replace(/<\/html>/gi, "")
     .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, "")
