@@ -1,3 +1,4 @@
+import { marked } from "marked";
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import "highlight.js/styles/hybrid.css";
@@ -6,38 +7,49 @@ import sanitizeHtml from "sanitize-html";
 import Image from "next/image";
 import styles from "~/components/ArticleBody.module.scss";
 
-export const formatRichText = (richText: string) => {
-  const $ = load(richText);
+const formatMarkdownHtml = (html: string) => {
+  const $ = load(html);
 
-  const highlight = (text: string, lang?: string) => {
-    if (!lang) return text;
+  const parseLanguageClass = (lang?: string): { language: string; filename: string | null } => {
+    if (!lang) return { language: "", filename: null };
+
+    // "language-typescript:route.tsx" -> { language: "typescript", filename: "route.tsx" }
+    const cleaned = lang.replace(/^language-/, "");
+    if (cleaned.includes(":")) {
+      const [language, filename] = cleaned.split(":");
+      return { language, filename };
+    }
+    return { language: cleaned, filename: null };
+  };
+
+  const highlight = (text: string, language: string) => {
+    if (!language) return text;
+
     try {
-      return hljs.highlight(text, { language: lang?.replace(/^language-/, "") || "" }).value;
+      return hljs.highlight(text, { language }).value;
     } catch {
       return hljs.highlightAuto(text).value;
     }
   };
 
-  $("div").each((_, elm) => {
-    const fileName = $(elm).attr("data-filename");
-    if (fileName !== undefined) {
-      $(elm).addClass(styles.fileRoot);
-      $(elm).prepend(`<span class="${styles.filename}">${fileName}</span>`);
-    }
-  });
-
   $("pre code").each((_, elm) => {
-    const lang = $(elm).attr("class");
-    const res = highlight($(elm).text(), lang);
-    $(elm).html(res);
+    const langClass = $(elm).attr("class");
+    const { language, filename } = parseLanguageClass(langClass);
+    const highlighted = highlight($(elm).text(), language);
+    $(elm).html(highlighted);
+
+    // ファイル名がある場合、preの前にファイル名要素を追加
+    if (filename) {
+      const $pre = $(elm).parent("pre");
+      $pre.wrap(`<div class="${styles.fileRoot}"></div>`);
+      $pre.before(`<span class="${styles.filename}">${filename}</span>`);
+    }
   });
 
   return $.html();
 };
 
-// サーバーサイドでHTMLコンテンツをsanitizeしてReact要素に変換
-export const parseArticleContent = (content: string) => {
-  // HTML前処理: 不要なタグを除去してsanitize
+const parseMarkdownContent = (content: string) => {
   const cleanedContent = sanitizeHtml(content, {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat([
       "img",
@@ -70,7 +82,6 @@ export const parseArticleContent = (content: string) => {
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
       if (domNode instanceof Element) {
-        // img要素をNext/Imageに変換（クリックハンドラーはクライアント側で追加）
         if (domNode.name === "img") {
           const { src, alt, width, height } = domNode.attribs;
 
@@ -80,7 +91,7 @@ export const parseArticleContent = (content: string) => {
           const imgHeight = height ? parseInt(height, 10) : 600;
 
           return (
-            <div className="article-image-wrapper" style={{ cursor: "zoom-in" }}>
+            <span className="article-image-wrapper" style={{ display: "block", cursor: "zoom-in" }}>
               <Image
                 src={src}
                 alt={alt || ""}
@@ -89,14 +100,19 @@ export const parseArticleContent = (content: string) => {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{ width: "100%", height: "auto" }}
               />
-            </div>
+            </span>
           );
         }
 
-        // リンクのtarget="_blank"にrel="noopener noreferrer"を追加
-        if (domNode.name === "a" && domNode.attribs.target === "_blank") {
+        if (domNode.name === "a") {
+          const href = domNode.attribs.href;
+          const isExternal = href?.startsWith("http");
           return (
-            <a href={domNode.attribs.href} target="_blank" rel="noopener noreferrer">
+            <a
+              href={href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+            >
               {domToReact(domNode.children as DOMNode[], options)}
             </a>
           );
@@ -107,3 +123,13 @@ export const parseArticleContent = (content: string) => {
 
   return parse(cleanedContent, options);
 };
+
+export async function renderMarkdown(markdown: string, slug: string): Promise<React.ReactNode> {
+  const processedMarkdown = markdown.replace(/!\[([^\]]*)\]\(\.\/([^)]+)\)/g, (_, alt, relativePath) => {
+    return `![${alt}](/blog/${slug}/${relativePath})`;
+  });
+
+  const html = await marked(processedMarkdown);
+  const formattedHtml = formatMarkdownHtml(html);
+  return parseMarkdownContent(formattedHtml);
+}

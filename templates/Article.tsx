@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArticleContent, getTypeColor } from "~/libs/microcms";
+import { ArticleContent, getTypeColor } from "~/libs/articles";
 import { PageLayout } from "~/templates/PageLayout";
 import styles from "~/templates/Article.module.scss";
 import { formatDisplayDate } from "~/libs/datetime";
