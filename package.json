@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev --hostname 0.0.0.0",
+    "prebuild": "[ -L public/blog ] && rm public/blog && cp -r blog public/blog || true",
     "build": "next build",
     "export": "next export",
     "start": "next start",
