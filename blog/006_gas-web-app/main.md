@@ -3,7 +3,7 @@ title: "GASとスプレッドシートで簡易Webアプリを作る"
 description: "Google App Script(GAS)はdoGet()またはdoPost()関数をスクリプト上に用意することで、HTTPサーバーとして機能させることができる。"
 type: "blue"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-04-01"
+publishedAt: "2024-08-25"
 ---
 Google App Script（GAS）はHTTPサーバーとして機能させられるので、スプレッドシートと組み合わせて簡易的なWebアプリを構築することができる。[公式ドキュメント](https://developers.google.com/apps-script/guides/web?hl=ja)
 

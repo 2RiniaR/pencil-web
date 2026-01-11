@@ -3,7 +3,7 @@ title: "最高に手作りなオンラインカードゲームを組み立てる
 description: "マルチプレイの疎通確認はできたので、今回はマルチプレイデバッグ環境の構築と、メインゲームのマルチプレイ化をしていく。あと、シミュレータを作ってカード同士の勝率も調べていくよ。"
 type: "sky"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-07-01"
+publishedAt: "2025-09-21"
 ---
 ![](./img/image0.png)
 

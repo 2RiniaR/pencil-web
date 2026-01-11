@@ -3,7 +3,7 @@ title: "うちの創造主がレアキャラすぎるので、人力で降臨さ
 description: "限界開発鯖の創造主は、我らが下界 †UNDERGROUND† に全然姿を現さない。このままでは農村の民々は飢饉に耐えられず、限界開発がやめられなくなってしまう。\nそこでsudoの絶対的権力を行使して、創造主を降臨させてよい法案が治外法権により成立した。"
 type: "green"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-02-01"
+publishedAt: "2024-03-03"
 ---
 [限界開発鯖](https://approvers.dev/)の[創造主](https://twitter.com/kousou4129)は、我らが下界 **_†UNDERGROUND†_** に全然姿を現さない。このままでは農村の民々は飢饉に耐えられず、限界開発がやめられなくなってしまう。
 

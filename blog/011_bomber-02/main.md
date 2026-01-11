@@ -3,7 +3,7 @@ title: "最高に手作りなオンラインカードゲームを組み立てる
 description: "前回でカードゲームが動くところまで作ったから、いよいよNetcode for GameObjectsを使ってマルチプレイを導入していこう。UnityのゲームをDedicated Serverとしてビルドして、Docker image化した上でVPSにデプロイし、クライアントアプリと疎通するところまで進めていくよ。"
 type: "sky"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-06-15"
+publishedAt: "2025-09-07"
 ---
 # 前回のあらすじ
 

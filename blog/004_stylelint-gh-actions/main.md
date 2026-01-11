@@ -3,7 +3,7 @@ title: "stylelintがGitHub Actionsでだけ \"Error [ERR_REQUIRE_ESM]: require()
 description: "GitHub Actionsからstylelintを使用したところ、\"Error [ERR_REQUIRE_ESM]: require() of ES Module ...\" のエラーが発生したので、対象パッケージのresolutionをpackage.jsonから変更することで解決した。"
 type: "blue"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-03-01"
+publishedAt: "2024-03-09"
 ---
 GitHub Actionsからstylelintを使用したところ、"Error \[ERR\_REQUIRE\_ESM\]: require() of ES Module ..." のエラーが発生したので、対象パッケージのresolutionをpackage.jsonから変更することで解決した。
 

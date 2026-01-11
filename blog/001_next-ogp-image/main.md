@@ -3,7 +3,7 @@ title: "Next.jsのImageResponseで動的にOGPの画像を生成する"
 description: "Next.jsで個人ブログサイトを作ってるときに、OGP（Open Graph Protocol）の画像を動的にしたかった。せっかくNext.js使ってるから、Nextの機能でAPI作って返す方法探してみたら ImageResponse なるものを見つけたので、試してみた。"
 type: "blue"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-01-15"
+publishedAt: "2024-02-29"
 ---
 Next.jsで個人ブログサイトを作ってるときに、OGP（Open Graph Protocol）の画像を動的にしたかった。せっかくNext.js使ってるから、Nextの機能でAPI作って返す方法探してみたら [ImageResponse](https://nextjs.org/docs/app/api-reference/functions/image-response) なるものを見つけたので、試してみた。
 

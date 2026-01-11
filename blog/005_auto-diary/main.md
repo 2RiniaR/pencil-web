@@ -3,7 +3,7 @@ title: "朝起きると自動でコメントが付く日記の作り方"
 description: "Googleスプレッドシートで、日記を書くと自動で生成AI（Gemini）からのコメントが生成される機能の作り方を解説します。"
 type: "blue"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-03-15"
+publishedAt: "2024-07-19"
 ---
 # はじまり
 

@@ -3,7 +3,7 @@ title: "【Unity】TestRunnerをEditorWindowから実行する【備忘録】"
 description: "TestRunner APIを使って、自作のEditorWindowからワンクリックで特定のPlayMode Testを実行できるようにする。実行結果によって後処理も変えたい。"
 type: "blue"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-05-15"
+publishedAt: "2024-09-28"
 ---
 自作のEditorWindowから、特定のテストを実行できるようにしたかった。
 

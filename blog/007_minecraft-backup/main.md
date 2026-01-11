@@ -3,7 +3,7 @@ title: "【Minecraft Java版】1クリックでワールドのバックアップ
 description: "PowerShellスクリプトで、指定したワールドをzip圧縮して指定場所に保存するプログラムを作る。zip圧縮には7-zipのCLI機能を使ってみる。あと、いつのデータか分かりやすいようにタイムスタンプも付ける。"
 type: "blue"
 thumbnail: "./img/thumbnail.png"
-publishedAt: "2024-04-15"
+publishedAt: "2024-09-02"
 ---
 ![](./img/image0.png)
 
