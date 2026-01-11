@@ -3,7 +3,7 @@ import styles from "./ArticleShare.module.scss";
 import twitterLogo from "public/twitter_logo.png";
 import { ExternalLink } from "~/components/ExternalLink";
 import linkIcon from "public/link_icon.svg";
-import { ArticleContent } from "~/libs/microcms";
+import { ArticleContent } from "~/libs/articles";
 import { siteName, siteUrl, twitterHashTag } from "~/libs/const";
 import { ClipboardButton } from "~/components/ClipboardButton";
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const ArticleShare = ({ article, displayMessage }: Props) => {
-  const url = `${siteUrl}/pages/${article.id}`;
+  const url = `${siteUrl}/pages/${article.slug}`;
 
   return (
     <div className={styles.root}>

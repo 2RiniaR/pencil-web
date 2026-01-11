@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { ImageResponse } from "next/og";
-import { getDetail } from "~/libs/microcms";
+import { getArticleBySlug } from "~/libs/articles";
 import { siteDomain, siteName, siteUrl } from "~/libs/const";
 
 export const runtime = "nodejs";
@@ -100,11 +100,13 @@ const OgImage = ({ title, thumbnail }: OgImageProps) => (
 
 export async function GET(_request: globalThis.Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const data = await getDetail(slug);
+  const article = await getArticleBySlug(slug);
 
   const font = await fs.readFile(path.join(process.cwd(), "assets", "mplus-2c-medium.ttf"));
 
-  return new ImageResponse(<OgImage title={data.title} thumbnail={data.thumbnail?.url} />, {
+  const thumbnailUrl = article.thumbnail ? `${siteUrl}${article.thumbnail}` : undefined;
+
+  return new ImageResponse(<OgImage title={article.title} thumbnail={thumbnailUrl} />, {
     fonts: [
       {
         name: "m-plus-2c",

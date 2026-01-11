@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArticleContent, getTypeColor } from "~/libs/microcms";
+import { ArticleContent, getTypeColor } from "~/libs/articles";
 import { PageLayout } from "~/templates/PageLayout";
 import styles from "~/templates/Article.module.scss";
 import { formatDisplayDate } from "~/libs/datetime";
@@ -10,9 +10,10 @@ import { ArticleBody } from "~/components/ArticleBody";
 type Props = {
   article: ArticleContent;
   parsedBody: React.ReactNode;
+  hasTwitterEmbed?: boolean;
 };
 
-export const Article = ({ article, parsedBody }: Props) => (
+export const Article = ({ article, parsedBody, hasTwitterEmbed }: Props) => (
   <PageLayout>
     <div className={styles.root}>
       <Link href="/" className={styles.back}>
@@ -25,7 +26,7 @@ export const Article = ({ article, parsedBody }: Props) => (
       <div className={styles.share}>
         <ArticleShare article={article} />
       </div>
-      <ArticleBody parsedContent={parsedBody} />
+      <ArticleBody parsedContent={parsedBody} hasTwitterEmbed={hasTwitterEmbed} />
       <div className={styles.about}>
         <About />
       </div>

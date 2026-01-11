@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Home.module.scss";
-import { ArticleContent, getTypeColor } from "~/libs/microcms";
+import { ArticleContent, getTypeColor } from "~/libs/articles";
 import { PageLayout } from "~/templates/PageLayout";
 import defaultThumbnail from "public/default_thumbnail.png";
 import { ExceedTime } from "~/components/ExceedTime";
@@ -18,7 +18,7 @@ export const Home = ({ articles }: Props) => (
         <About />
       </div>
       {articles.map((article) => (
-        <Link key={article.id} href={`pages/${article.id}`} className={styles.article}>
+        <Link key={article.slug} href={`pages/${article.slug}`} className={styles.article}>
           <div className={styles.content} style={{ borderLeft: `8px solid ${getTypeColor(article.type)}` }}>
             <p className={styles.name}>{article.title}</p>
             <p className={styles.detail}>{article.description}</p>
@@ -27,7 +27,7 @@ export const Home = ({ articles }: Props) => (
             </p>
           </div>
           <Image
-            src={article.thumbnail?.url ?? defaultThumbnail}
+            src={article.thumbnail ?? defaultThumbnail}
             width={320}
             height={180}
             alt={article.title}

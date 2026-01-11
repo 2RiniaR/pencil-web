@@ -1,5 +1,5 @@
-import { getDetail, getList } from "~/libs/microcms";
-import { formatRichText, parseArticleContent } from "~/libs/microcms-client";
+import { getArticleBySlug, getAllSlugs } from "~/libs/articles";
+import { renderMarkdown } from "~/libs/markdown";
 import { Article } from "~/templates/Article";
 import { siteName, siteUrl, twitterId } from "~/libs/const";
 
@@ -10,22 +10,22 @@ type Props = {
 };
 
 export const generateStaticParams = async () => {
-  const data = await getList();
-  return data.contents.map((page) => ({
-    slug: page.id
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({
+    slug
   }));
 };
 
 export const generateMetadata = async ({ params }: Props) => {
   const { slug } = await params;
-  const data = await getDetail(slug);
+  const article = await getArticleBySlug(slug);
   return {
-    title: `${data.title} - ${siteName}`,
-    description: data.description,
+    title: `${article.title} - ${siteName}`,
+    description: article.description,
     openGraph: {
       url: siteUrl,
-      title: `${data.title} - ${siteName}`,
-      description: data.description,
+      title: `${article.title} - ${siteName}`,
+      description: article.description,
       siteName: siteName,
       type: "article",
       images: {
@@ -44,13 +44,10 @@ export const generateMetadata = async ({ params }: Props) => {
 
 const Page = async ({ params }: Props) => {
   const { slug } = await params;
-  const data = await getDetail(slug);
+  const article = await getArticleBySlug(slug);
+  const { content: parsedBody, hasTwitterEmbed } = await renderMarkdown(article.body, slug);
 
-  // サーバーサイドでHTMLをパース
-  const formattedBody = formatRichText(data.body);
-  const parsedBody = parseArticleContent(formattedBody);
-
-  return <Article article={data} parsedBody={parsedBody} />;
+  return <Article article={article} parsedBody={parsedBody} hasTwitterEmbed={hasTwitterEmbed} />;
 };
 
 export default Page;

@@ -1,9 +1,9 @@
-import { getList } from "~/libs/microcms";
+import { getArticleList } from "~/libs/articles";
 import { Home } from "~/templates/Home";
 
 const Page = async () => {
-  const data = await getList({ limit: 50 });
-  return <Home articles={data.contents} />;
+  const articles = await getArticleList();
+  return <Home articles={articles} />;
 };
 
 export default Page;
