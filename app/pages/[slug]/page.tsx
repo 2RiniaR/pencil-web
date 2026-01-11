@@ -45,9 +45,9 @@ export const generateMetadata = async ({ params }: Props) => {
 const Page = async ({ params }: Props) => {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  const parsedBody = await renderMarkdown(article.body, slug);
+  const { content: parsedBody, hasTwitterEmbed } = await renderMarkdown(article.body, slug);
 
-  return <Article article={article} parsedBody={parsedBody} />;
+  return <Article article={article} parsedBody={parsedBody} hasTwitterEmbed={hasTwitterEmbed} />;
 };
 
 export default Page;

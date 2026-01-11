@@ -84,7 +84,7 @@ publishedAt: "2024-02-01"
 
 そして3/16(土)には、 **4周年を記念した外部参加OKなLT会** があるとのこと。 楽しみ！
 
-[](https://approvers.connpass.com/event/309470/)
+https://approvers.connpass.com/event/309470/
 
 実は今回の記事も、ちょうど周年でタイミングが良かったので書くことにした。
 

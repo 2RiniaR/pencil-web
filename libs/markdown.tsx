@@ -5,6 +5,7 @@ import "highlight.js/styles/hybrid.css";
 import parse, { Element, HTMLReactParserOptions, domToReact, DOMNode } from "html-react-parser";
 import sanitizeHtml from "sanitize-html";
 import Image from "next/image";
+import { processEmbeds, hasTwitterEmbed } from "./embed";
 import styles from "~/components/ArticleBody.module.scss";
 
 const formatMarkdownHtml = (html: string) => {
@@ -65,13 +66,14 @@ const parseMarkdownContent = (content: string) => {
       ...sanitizeHtml.defaults.allowedAttributes,
       "*": ["class", "id", "style", "data-*"],
       img: ["src", "alt", "width", "height", "loading"],
-      iframe: ["src", "width", "height", "frameborder", "allow", "allowfullscreen"],
+      iframe: ["src", "width", "height", "frameborder", "allow", "allowfullscreen", "title"],
       a: ["href", "target", "rel"],
       video: ["src", "controls", "width", "height"],
       audio: ["src", "controls"],
-      source: ["src", "type"]
+      source: ["src", "type"],
+      blockquote: ["class", "data-*"]
     },
-    allowedIframeHostnames: ["www.youtube.com", "youtube.com", "player.vimeo.com"]
+    allowedIframeHostnames: ["www.youtube.com", "youtube.com", "www.youtube-nocookie.com", "player.vimeo.com"]
   })
     .replace(/<html[^>]*>/gi, "")
     .replace(/<\/html>/gi, "")
@@ -83,9 +85,14 @@ const parseMarkdownContent = (content: string) => {
     replace: (domNode) => {
       if (domNode instanceof Element) {
         if (domNode.name === "img") {
-          const { src, alt, width, height } = domNode.attribs;
+          const { src, alt, width, height, class: className } = domNode.attribs;
 
           if (!src) return;
+
+          // リンクカードの画像は外部URLのためそのまま表示
+          if (className === "link-card-image") {
+            return;
+          }
 
           const imgWidth = width ? parseInt(width, 10) : 800;
           const imgHeight = height ? parseInt(height, 10) : 600;
@@ -124,12 +131,22 @@ const parseMarkdownContent = (content: string) => {
   return parse(cleanedContent, options);
 };
 
-export async function renderMarkdown(markdown: string, slug: string): Promise<React.ReactNode> {
+export type RenderMarkdownResult = {
+  content: React.ReactNode;
+  hasTwitterEmbed: boolean;
+};
+
+export async function renderMarkdown(markdown: string, slug: string): Promise<RenderMarkdownResult> {
   const processedMarkdown = markdown.replace(/!\[([^\]]*)\]\(\.\/([^)]+)\)/g, (_, alt, relativePath) => {
     return `![${alt}](/blog/${slug}/${relativePath})`;
   });
 
   const html = await marked(processedMarkdown);
   const formattedHtml = formatMarkdownHtml(html);
-  return parseMarkdownContent(formattedHtml);
+  const embedProcessedHtml = await processEmbeds(formattedHtml);
+
+  return {
+    content: parseMarkdownContent(embedProcessedHtml),
+    hasTwitterEmbed: hasTwitterEmbed(embedProcessedHtml)
+  };
 }

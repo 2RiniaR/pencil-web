@@ -11,11 +11,7 @@ publishedAt: "2024-03-15"
 
 今回はGAS（Google App Script）を使用してスプレッドシートから日記を読み込み、生成AI「Gemini」に生成してもらったコメントを書き込むようにする。
 
-> AIのコメントで自己肯定感爆上げできる日記スプシ作った  
->   
-> 寝て起きるとコメントが付くので、明日が楽しみ......！ [pic.twitter.com/2q0mIRCEyB](https://t.co/2q0mIRCEyB)
-> 
-> — Rinia／りにあ (@2RiniaR) [July 15, 2024](https://twitter.com/2RiniaR/status/1812904616260214986?ref_src=twsrc%5Etfw)
+https://x.com/2RiniaR/status/1812904616260214986?ref_src=twsrc%5Etfw
 
 # シートを作る
 
